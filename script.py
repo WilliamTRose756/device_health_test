@@ -73,16 +73,13 @@ resource = boto3.resource(
 
 # Name files and determine location
 timestamp = str(datetime.now().replace(microsecond=0))
-current = 'current/device_status_info.csv'
-history = f'history/device_status_info_{timestamp}.csv'
+current = 'current/this_is_a_test.csv'
 
 # Add to both current and historical folders
 csv_buffer = StringIO()
 df.to_csv(csv_buffer, index=False)
 resource.Object(BUCKET_NAME, current).put( Body=csv_buffer.getvalue())
-resource.Object(BUCKET_NAME, history).put( Body=csv_buffer.getvalue())
 
-# This is the simple branch
 
 
 
