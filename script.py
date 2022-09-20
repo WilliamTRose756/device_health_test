@@ -76,7 +76,7 @@ filename = 'folder-1/sliced_data.csv'
 csv_buffer = StringIO()
 df.to_csv(csv_buffer, index=False)
 
-resource.Object(bucket_name=BUCKET_NAME, filename=filename).put(Body=csv_buffer.getvalue())
+resource.Object(bucket_name=BUCKET_NAME, key=filename).put(Body=csv_buffer.getvalue())
 
 
 
