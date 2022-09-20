@@ -24,6 +24,7 @@ jobs:
       - name: execute py script # run main.py
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
+          USERNAME_SMTP: ${{ secrets.USERNAME_SMTP }}
           URL_DEVICE_STATUS: ${{ secrets.URL_DEVICE_STATUS }}
           URL_OBTAIN_LOGIN_TOKEN: ${{ secrets.URL_OBTAIN_LOGIN_TOKEN }}
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
