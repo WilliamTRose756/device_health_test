@@ -23,12 +23,13 @@ jobs:
           
       - name: execute py script # run main.py
         env:
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          REC_EMAIL: ${{ secrets.REC_EMAIL }}
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           URL_DEVICE_STATUS: ${{ secrets.URL_DEVICE_STATUS }}
           URL_OBTAIN_LOGIN_TOKEN: ${{ secrets.URL_OBTAIN_LOGIN_TOKEN }}
-          USERNAME_SMTP: ${{ secrets.USERNAME_SMTP }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_CODE: ${{ secrets.AWS_SECRET_ACCESS_CODE }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+
         run: python script.py
           
