@@ -1,4 +1,3 @@
-import json
 import boto3
 import pandas as pd
 from dotenv import load_dotenv
@@ -60,12 +59,11 @@ get_ClearStream_login_token()
 
 
 
-# Format the data in a way that can be converted into csv format that quicksites can use
+# Format to pandas dataframe
 df=pd.DataFrame(devices_list[0])
 
 
 # Send the file up to the s3 buckets
-
 resource = boto3.resource(
     's3',
     aws_access_key_id = os.getenv('AWS_ACCESS_KEY'),
