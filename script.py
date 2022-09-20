@@ -3,6 +3,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import os
 from io import StringIO
+from datetime import datetime
 import requests
 
 # Initialize environment variables
@@ -62,8 +63,7 @@ get_ClearStream_login_token()
 # Format to pandas dataframe
 df=pd.DataFrame(devices_list[0])
 
-
-# Send the file up to the s3 buckets
+# Send the file up to the S3 buckets
 resource = boto3.resource(
     's3',
     aws_access_key_id = os.getenv('AWS_ACCESS_KEY'),
@@ -71,12 +71,16 @@ resource = boto3.resource(
     region_name = os.getenv('AWS_REGION')
 )
 
-filename = 'folder-1/sliced_data.csv'
+# Name files and determine location
+timestamp = str(datetime.now().replace(microsecond=0))
+current = 'current/device_status_info.csv'
+history = f'history/device_status_info_{timestamp}.csv'
 
+# Add to both current and historical folders
 csv_buffer = StringIO()
 df.to_csv(csv_buffer, index=False)
-
-resource.Object(BUCKET_NAME, filename).put(Body=csv_buffer.getvalue())
+resource.Object(BUCKET_NAME, current).put( Body=csv_buffer.getvalue())
+resource.Object(BUCKET_NAME, history).put( Body=csv_buffer.getvalue())
 
 
 
